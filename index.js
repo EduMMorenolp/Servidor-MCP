@@ -4,25 +4,32 @@ import calendario from './contexts/calendario.js';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+// Middleware de autenticación (simple, por header)
+app.use((req, res, next) => {
+  const token = req.headers['authorization'];
+  if (token !== 'Bearer mipassword123') {
+    return res.status(401).json({ error: 'No autorizado' });
+  }
+  next();
+});
 
-// Listar todos los contextos disponibles
+// Endpoint: lista de contextos
 app.get('/contexts', (req, res) => {
   res.json([
     {
       id: 'calendario',
       name: 'Calendario',
-      description: 'Eventos del calendario personal'
+      description: 'Eventos programados del usuario'
     }
   ]);
 });
 
-// Devolver el contenido del contexto calendario
+// Endpoint: obtener un contexto
 app.get('/contexts/calendario', (req, res) => {
   const data = calendario();
   res.json(data);
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor MCP activo en http://localhost:${PORT}`);
+  console.log(`🧠 MCP Server listo en http://localhost:${PORT}`);
 });

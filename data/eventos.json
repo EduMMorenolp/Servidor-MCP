@@ -1,0 +1,15 @@
+[
+    {
+      "id": 1,
+      "titulo": "Clase de matemática",
+      "fecha": "2025-04-28",
+      "hora": "08:00"
+    },
+    {
+      "id": 2,
+      "titulo": "Reunión con padres",
+      "fecha": "2025-04-29",
+      "hora": "17:00"
+    }
+  ]
+  
